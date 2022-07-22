@@ -1,36 +1,130 @@
-# This is a basic workflow to help you get started with Actions
 
-name: CI
+name: zju-ncov-hitcarder-action
+2
+description: ZJU-nCov-HitCarder Action.
+3
+author: Long0x0
+4
+​
+5
+branding:
+6
+  icon: mail
+7
+  color: blue
+8
+​
+9
+inputs:
+10
+  username:
+11
+    description: zju account username(student id).
+12
+    required: true
+13
+  password:
+14
+    description: zju account password.
+15
+    required: true
+16
+  dingtalk_token:
+17name: zju-ncov-hitcarder-action
+description: ZJU-nCov-HitCarder Action.
+author: Long0x0
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+branding:
+  icon: mail
+  color: blue
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+inputs:
+  username:
+    description: zju account username(student id).
+    required: true
+  password:
+    description: zju account password.
+    required: true
+  dingtalk_token:
+    description: dingtalk_token.
+    required: false
+    default: ''
+  serverchan_key:
+    description: serverchan_key.
+    required: false
+    default: ''
+  pushplus_token:
+    description: pushplus_token.
+    required: false
+    default: ''
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+runs:
+  using: "composite"
+  steps:
+    - name: Working
+      env:
+        USERNAME: ${{ inputs.username }}
+        PASSWORD: ${{ inputs.password }}
+        DINGTALK_TOKEN: ${{ inputs.dingtalk_token }}
+        SERVERCHAN_KEY: ${{ inputs.serverchan_key }}
+        PUSHPLUS_TOKEN: ${{ inputs.pushplus_token }}
+      run: |
+        cd ${{ github.action_path }}
+        pip install -r ./requirements.txt
+        python3 ./hitcarder.py
+      shell: bash
+    description: dingtalk_token.
+18
+    required: false
+19
+    default: ''
+20
+  serverchan_key:
+21
+    description: serverchan_key.
+22
+    required: false
+23
+    default: ''
+24
+  pushplus_token:
+25
+    description: pushplus_token.
+26
+    required: false
+27
+    default: ''
+28
+​
+29
+runs:
+30
+  using: "composite"
+31
+  steps:
+32
+    - name: Working
+33
+      env:
+34
+        USERNAME: ${{ inputs.username }}
+35
+        PASSWORD: ${{ inputs.password }}
+36
+        DINGTALK_TOKEN: ${{ inputs.dingtalk_token }}
+37
+        SERVERCHAN_KEY: ${{ inputs.serverchan_key }}
+38
+        PUSHPLUS_TOKEN: ${{ inputs.pushplus_token }}
+39
+      run: |
+40
+        cd ${{ github.action_path }}
+41
+        pip install -r ./requirements.txt
+42
+        python3 ./hitcarder.py
+43
+      shell: bash
+44
+​
